@@ -1,0 +1,175 @@
+/* Import premium fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium background patterns */
+.premium-bg {
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background-attachment: fixed;
+}
+
+.glass-bg {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom styles for premium design */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-premium text-premium-text bg-premium-dark premium-bg;
+    min-height: 100vh;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .premium-card {
+    @apply bg-card-gradient backdrop-blur-xl rounded-2xl shadow-premium border border-white/10;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.6) 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .premium-card:hover {
+    @apply shadow-premium-lg transform scale-[1.02];
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.7) 100%);
+  }
+
+  .glass-card {
+    @apply glass-bg rounded-2xl shadow-glass;
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    @apply shadow-premium;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .premium-button {
+    @apply relative overflow-hidden bg-gradient-to-r from-premium-purple to-premium-blue text-white font-semibold py-3 px-6 rounded-xl;
+    @apply shadow-premium hover:shadow-premium-lg transform hover:scale-105 transition-all duration-300;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  .premium-button::before {
+    content: '';
+    @apply absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300;
+  }
+
+  .premium-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .premium-button:active {
+    @apply scale-95;
+  }
+
+  .premium-button.ripple::after {
+    content: '';
+    @apply absolute inset-0 rounded-xl;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: ripple 0.6s linear;
+  }
+
+  .premium-table {
+    @apply w-full table-auto text-sm rounded-2xl overflow-hidden shadow-premium;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .premium-table thead {
+    @apply bg-gradient-to-r from-premium-blue/20 to-premium-purple/20;
+  }
+
+  .premium-table th {
+    @apply p-4 font-semibold text-premium-text text-left border-b border-white/10;
+  }
+
+  .premium-table td {
+    @apply p-4 text-premium-text-secondary border-b border-white/5;
+  }
+
+  .premium-table tbody tr:nth-child(even) {
+    @apply bg-white/5;
+  }
+
+  .premium-table tbody tr:hover {
+    @apply bg-premium-gold/10 transition-colors duration-200;
+  }
+
+  .premium-input {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-premium-text;
+    @apply placeholder-premium-text-secondary focus:outline-none focus:ring-2 focus:ring-premium-gold/50 focus:border-premium-gold/50;
+    transition: all 0.3s ease;
+  }
+
+  .premium-input:focus {
+    @apply bg-white/10;
+  }
+
+  .fade-in {
+    @apply animate-fade-in;
+  }
+
+  .slide-up {
+    @apply animate-slide-up;
+  }
+
+  .bounce-subtle {
+    @apply animate-bounce-subtle;
+  }
+
+  .glow-effect {
+    @apply animate-glow;
+  }
+
+  /* Loading states */
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-premium-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-premium-blue rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-premium-purple;
+  }
+}

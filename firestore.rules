@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // User roles
+    function isOperator() {
+      return request.auth != null && request.auth.token.role == 'operator';
+    }
+    
+    function isManager() {
+      return request.auth != null && request.auth.token.role == 'manager';
+    }
+    
+    // Common rules for all users
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Auto answers collection
+    match /autoAnswers/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    // Services and prices collection
+    match /servicesPrices/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    // Service information collection
+    match /serviceInfo/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    // Property management collection
+    match /propertyManagement/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    // Outstanding payments collection
+    match /outstandingPayments/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    // Schedule collections
+    match /dispatchingSchedule/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+
+    match /managementSchedule/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if true;
+    }
+  }
+}
